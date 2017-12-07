@@ -9,7 +9,7 @@
 
 | Component | Build Status | NuGet Package |
 |:-|---|---|
-| Class Libraries | [![Build status](https://ci.appveyor.com/api/projects/status/terbqvfdlw8po3cm?svg=true)](https://ci.appveyor.com/project/nfbot/lib-windows-devices-gpio) | [![NuGet](https://img.shields.io/nuget/dt/nanoFramework.Windows.Devices.Gpio.svg)](https://www.nuget.org/packages/nanoFramework.Windows.Devices.Gpio) |
+| Class Libraries | [![Build status](https://ci.appveyor.com/api/projects/status/rx2hrsucsn1p0ohd?svg=true)](https://ci.appveyor.com/project/nfbot/lib-windows-devices-gpio) | [![NuGet](https://img.shields.io/nuget/dt/nanoFramework.Windows.Devices.Gpio.svg)](https://www.nuget.org/packages/nanoFramework.Windows.Devices.Gpio) |
 
 
 ## Feedback and documentation
