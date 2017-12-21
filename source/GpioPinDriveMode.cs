@@ -41,6 +41,10 @@ namespace Windows.Devices.Gpio
         /// <summary>
         /// Configures the GPIO pin in open collector mode with resistive pull-down mode.
         /// </summary>
-        OutputOpenSourcePullDown
+        OutputOpenSourcePullDown,
+        /// <summary>
+        /// Configures the GPIO pin for an alternate function
+        /// </summary>
+        Alternate
     }
 }
