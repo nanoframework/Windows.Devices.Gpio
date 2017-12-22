@@ -4,13 +4,15 @@
 
 ### Welcome to the **nanoFramework** Windows.Devices.Gpio Library repository!
 
+[![NuGet](https://img.shields.io/nuget/dt/nanoFramework.Windows.Devices.Gpio.svg)]() [![#yourfirstpr](https://img.shields.io/badge/first--timers--only-friendly-blue.svg)](https://github.com/nanoframework/Home/blob/master/CONTRIBUTING.md)
+
 
 ## Build status
 
 | Component | Build Status | NuGet Package |
 |:-|---|---|
-| Class Libraries | [![Build status](https://ci.appveyor.com/api/projects/status/rx2hrsucsn1p0ohd?svg=true)](https://ci.appveyor.com/project/nfbot/lib-windows-devices-gpio) | [![NuGet](https://img.shields.io/nuget/dt/nanoFramework.Windows.Devices.Gpio.svg)](https://www.nuget.org/packages/nanoFramework.Windows.Devices.Gpio) |
-
+| Windows.Devices.Gpio | [![Build status](https://ci.appveyor.com/api/projects/status/rx2hrsucsn1p0ohd/branch/master?svg=true)](https://ci.appveyor.com/project/nfbot/lib-windows-devices-gpio/branch/master) | [![NuGet](https://img.shields.io/nuget/vpre/nanoFramework.Windows.Devices.Gpio.svg)](https://www.nuget.org/packages/nanoFramework.Windows.Devices.Gpio/)  |
+| Windows.Devices.Gpio (preview) | [![Build status](https://ci.appveyor.com/api/projects/status/rx2hrsucsn1p0ohd?svg=true)](https://ci.appveyor.com/project/nfbot/lib-windows-devices-gpio) | [![MyGet Pre Release](https://img.shields.io/myget/nanoframework-dev/vpre/nanoFramework.Windows.Devices.Gpio.svg)](https://www.myget.org/feed/nanoframework-dev/package/nuget/nanoFramework.Windows.Devices.Gpio) |
 
 ## Feedback and documentation
 
