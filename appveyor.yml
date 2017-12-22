@@ -59,6 +59,8 @@
 
       msbuild source\nanoFramework.Windows.Devices.Gpio.sln /p:Configuration=Release /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 
+      msbuild source\nanoFramework.Windows.Devices.Gpio.Nuget.sln /p:Configuration=Release /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+
   before_deploy:
   # need this to keep ruby happy
   - ps: md c:\tmp
@@ -150,6 +152,8 @@
   - ps: >-
 
       msbuild source\nanoFramework.Windows.Devices.Gpio.sln /p:Configuration=Release /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+
+      msbuild source\nanoFramework.Windows.Devices.Gpio.Nuget.sln /p:Configuration=Release /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 
   on_success:
   # for this environment variable to work here it has to be set in AppVeyor UI
@@ -257,6 +261,8 @@
   - ps: >-
 
       msbuild source\nanoFramework.Windows.Devices.Gpio.sln /p:Configuration=Release /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+
+      msbuild source\nanoFramework.Windows.Devices.Gpio.Nuget.sln /p:Configuration=Release /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 
   before_deploy:
   # need this to keep ruby happy
