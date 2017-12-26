@@ -82,7 +82,7 @@
       appveyor_repo_tag: true
   - provider: GitHub
     tag: v$(GitVersion_NuGetVersionV2)
-    release: nanoFramework Core Library v$(gitversion_semver)
+    release: nanoFramework Windows.Devices.Gpio Library v$(gitversion_semver)
     description: '[CHANGELOG.md](https://github.com/nanoframework/lib-nanoFramework.Windows.Devices.Gpio/blob/master/CHANGELOG.md)\n\n## Install from NuGet\n\nThe following NuGet packages are available for download from this release\n\n:package: [.NET](https://www.nuget.org/packages/nanoFramework.Windows.Devices.Gpio/$(GitVersion_NuGetVersionV2)) v$(GitVersion_NuGetVersionV2)'
     auth_token:
       secure: DNixoFFE+pGlwyhj7McfZoln42vOmj0iY1iNV9zXEr3y0NpXlOIgL8k5ehzlFM1S
@@ -173,7 +173,7 @@
     skip_symbols: true
   - provider: GitHub
     tag: v$(GitVersion_NuGetVersionV2)
-    release: nanoFramework Core Library v$(gitversion_semver)
+    release: nanoFramework Windows.Devices.Gpio Library v$(gitversion_semver)
     description: '[CHANGELOG.md](https://github.com/nanoframework/lib-Windows.Devices.Gpio/blob/master/CHANGELOG.md)\n\n## Install from NuGet\n\nThe following NuGet packages are available for download from this release\n\n:package: [.NET](https://www.nuget.org/packages/nanoFramework.Windows.Devices.Gpio/$(GitVersion_NuGetVersionV2)) v$(GitVersion_NuGetVersionV2)'
     auth_token:
       secure: DNixoFFE+pGlwyhj7McfZoln42vOmj0iY1iNV9zXEr3y0NpXlOIgL8k5ehzlFM1S
@@ -284,7 +284,7 @@
 
   - provider: GitHub
     tag: v$(GitVersion_NuGetVersionV2)
-    release: nanoFramework Core Library v$(gitversion_semver)
+    release: nanoFramework Windows.Devices.Gpio Library v$(gitversion_semver)
     description: '[CHANGELOG.md](https://github.com/nanoframework/lib-Windows.Devices.Gpio/blob/master/CHANGELOG.md)\n\n## Install from NuGet\n\nThe following NuGet packages are available for download from this release\n\n:package: [.NET](https://www.nuget.org/packages/nanoFramework.Windows.Devices.Gpio/$(GitVersion_NuGetVersionV2)) v$(GitVersion_NuGetVersionV2)'
     auth_token:
       secure: DNixoFFE+pGlwyhj7McfZoln42vOmj0iY1iNV9zXEr3y0NpXlOIgL8k5ehzlFM1S

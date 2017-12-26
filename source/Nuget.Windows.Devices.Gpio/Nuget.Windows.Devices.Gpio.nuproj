@@ -40,6 +40,11 @@
       <Version>[1.0.0-preview165]</Version>
     </Dependency>
   </ItemGroup>
+  <ItemGroup>
+    <Dependency Include="nanoFramework.System.DateTime">
+      <Version>[1.0.0-preview007]</Version>
+    </Dependency>
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>96eaba11-6a33-454d-a7b2-b96ca5617e8c</ProjectGuid>
   </PropertyGroup>
