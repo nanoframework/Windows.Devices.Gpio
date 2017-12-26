@@ -42,7 +42,12 @@
     <Dependency Include="nanoFramework.Runtime.Events">
       <Version>[1.0.0-preview165]</Version>
     </Dependency>
-  </ItemGroup>  
+  </ItemGroup>
+  <ItemGroup>
+    <Dependency Include="nanoFramework.System.DateTime">
+      <Version>[1.0.0-preview007]</Version>
+    </Dependency>
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>8FD36AD6-387C-48F0-A695-52D9149216FB</ProjectGuid>
   </PropertyGroup>
