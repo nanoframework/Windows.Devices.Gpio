@@ -6,7 +6,6 @@
 using nanoFramework.Runtime.Events;
 using System;
 using System.Collections;
-using System.Text;
 
 namespace Windows.Devices.Gpio
 {
