@@ -54,6 +54,7 @@
   </ItemGroup>
   <Import Project="$(NanoFrameworkProjectSystemPath)NFProjectSystem.props" Condition="Exists('$(NanoFrameworkProjectSystemPath)NFProjectSystem.props')" />
   <ItemGroup>
+    <Compile Include="Extensions\Gpio​PinExtensions.cs" />
     <Compile Include="GpioOpenStatus.cs" />
     <Compile Include="GpioPinDriveMode.cs" />
     <Compile Include="GpioPinEdge.cs" />

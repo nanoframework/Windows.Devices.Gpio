@@ -27,7 +27,6 @@ namespace Windows.Devices.Gpio
         private object _syncLock = new object();
 
         private readonly int _pinNumber;
-        private int _alternateFunction = 0;
         private GpioPinDriveMode _driveMode = GpioPinDriveMode.Input;
         private TimeSpan _debounceTimeout = TimeSpan.Zero;
         private GpioPinValueChangedEventHandler _callbacks = null;
@@ -156,21 +155,18 @@ namespace Windows.Devices.Gpio
         /// <item><term>E_ACCESSDENIED : The pin is open in shared read-only mode.Close the pin and reopen it in exclusive mode to change the drive mode of the pin.</term></item>
         /// </list>
         /// </remarks>
-        public void SetDriveMode(GpioPinDriveMode value, int alternateFunction = 0)
+        public void SetDriveMode(GpioPinDriveMode value)
         {
             lock (_syncLock)
             {
                 // check if pin has been disposed
                 if (_disposedValue) { throw new ObjectDisposedException(); }
 
-                if (_driveMode == value && alternateFunction == _alternateFunction) return;
-
                 // check if the request drive mode is supported
                 // need to call the native method directly because we are already inside a lock
                 if (NativeIsDriveModeSupported(value))
                 {
-                    NativeSetDriveMode(value, alternateFunction);
-                    _alternateFunction = alternateFunction;
+                    NativeSetDriveMode(value);
                     _driveMode = value;
                 }
             }
@@ -249,7 +245,7 @@ namespace Windows.Devices.Gpio
                     try
                     {
                         _callbacks = callbacksNew;
-                        NativeSetDriveMode(_driveMode, _alternateFunction);
+                        NativeSetDriveMode(_driveMode);
                     }
                     catch
                     {
@@ -274,7 +270,7 @@ namespace Windows.Devices.Gpio
                     try
                     {
                         _callbacks = callbacksNew;
-                        NativeSetDriveMode(_driveMode, _alternateFunction);
+                        NativeSetDriveMode(_driveMode);
                     }
                     catch
                     {
@@ -348,13 +344,13 @@ namespace Windows.Devices.Gpio
 
         #endregion
 
-        #region extenal calls to native implementations
+        #region external calls to native implementations
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         private extern bool NativeIsDriveModeSupported(GpioPinDriveMode driveMode);
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        private extern void NativeSetDriveMode(GpioPinDriveMode driveMode, int alternateFunction);
+        private extern void NativeSetDriveMode(GpioPinDriveMode driveMode);
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         private extern bool NativeInit(int pinNumber);
@@ -364,6 +360,9 @@ namespace Windows.Devices.Gpio
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         private extern void WriteNative(GpioPinValue value);
+
+        [MethodImpl(MethodImplOptions.InternalCall)]
+        internal extern void NativeSetAlternateFunction(int alternateFunction);
 
         #endregion
     }
