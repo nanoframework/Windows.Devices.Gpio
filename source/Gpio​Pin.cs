@@ -41,7 +41,7 @@ namespace Windows.Devices.Gpio
         {
             if(NativeInit(_pinNumber))
             {
-                // add the pin to the event listner in order to receive the callbacks from the native interrupts
+                // add the pin to the event listener in order to receive the callbacks from the native interrupts
                 s_eventListener.AddPin(_pinNumber, this);
 
                 return true;
@@ -148,7 +148,6 @@ namespace Windows.Devices.Gpio
         /// </summary>
         /// <param name="value">An enumeration value that specifies drive mode to use for the GPIO pin.
         /// The drive mode specifies whether the pin is configured as an input or an output, and determines how values are driven onto the pin.</param>
-        /// <param name="alternateFunction">An integer value that specifies the alternate function assigned to the GPIO pin.</param>
         /// <remarks>The following exceptions can be thrown by this method:
         /// <list type="bullet">
         /// <item><term>E_INVALIDARG : The GPIO pin does not support the specified drive mode.</term></item>
@@ -205,7 +204,7 @@ namespace Windows.Devices.Gpio
                     // native write
                     WriteNative(value);
 
-                    // update mmemory field
+                    // update memory field
                     _lastOutputValue = value;
 
                     // trigger the pin value changed event, if any is set
@@ -282,7 +281,7 @@ namespace Windows.Devices.Gpio
         }
 
         /// <summary>
-        /// Handles internal events and re-dispatches them to the publicly subsribed delegates.
+        /// Handles internal events and re-dispatches them to the publicly subscribed delegates.
         /// </summary>
         /// <param name="edge">The state transition for this event.</param>
         internal void OnPinChangedInternal(GpioPinEdge edge)
