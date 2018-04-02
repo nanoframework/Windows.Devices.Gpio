@@ -32,6 +32,11 @@ namespace Windows.Devices.Gpio
         private GpioPinValueChangedEventHandler _callbacks = null;
         private GpioPinValue _lastOutputValue = GpioPinValue.Low;
 
+        #pragma warning disable 0414
+        // this field is used in native so it must be kept here despite "not being used"
+        private GpioPinValue _lastInputValue = GpioPinValue.Low;
+        #pragma warning restore 0414
+
         internal Gpio​Pin(int pinNumber)
         {
             _pinNumber = pinNumber;
