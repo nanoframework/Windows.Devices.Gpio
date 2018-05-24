@@ -304,6 +304,16 @@ namespace Windows.Devices.Gpio
             callbacks?.Invoke(this, new GpioPinValueChangedEventArgs(edge));
         }
 
+        /// <summary>
+        /// Toggles the output of the general purpose I/O (GPIO) pin if the pin is configured as an output.
+        /// </summary>
+        /// <remarks>
+        /// This method is exclusive of nanoFramework and it's not available in the UWP API.
+        /// </remarks>
+        [MethodImpl(MethodImplOptions.InternalCall)]
+        public extern void Toggle();
+
+
         #region IDisposable Support
 
         private bool _disposedValue;
