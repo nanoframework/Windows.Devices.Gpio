@@ -209,20 +209,17 @@ namespace Windows.Devices.Gpio
                     // native write
                     WriteNative(value);
 
-                    // update memory field
-                    _lastOutputValue = value;
-
                     // trigger the pin value changed event, if any is set
                     GpioPinValueChangedEventHandler callbacks = _callbacks;
 
-                    if (_lastOutputValue == GpioPinValue.High)
+                    if (_lastOutputValue == GpioPinValue.Low)
                     {
-                        // last value is HIGH, so now it's LOW
+                        // last value is now LOW, so it was HIGH
                         callbacks?.Invoke(this, new GpioPinValueChangedEventArgs(GpioPinEdge.FallingEdge));
                     }
                     else
                     {
-                        // last value is LOW, so now it's HIGH
+                        // last value is now HIGH, so it was LOW
                         callbacks?.Invoke(this, new GpioPinValueChangedEventArgs(GpioPinEdge.RisingEdge));
                     }
                 }
