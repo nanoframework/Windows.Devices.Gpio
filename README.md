@@ -1,4 +1,4 @@
-[![NuGet](https://img.shields.io/nuget/dt/nanoFramework.Windows.Devices.Gpio.svg)]() [![#yourfirstpr](https://img.shields.io/badge/first--timers--only-friendly-blue.svg)](https://github.com/nanoframework/Home/blob/master/CONTRIBUTING.md)  [![Discord](https://img.shields.io/discord/478725473862549535.svg)](https://discord.gg/gCyBu8T)
+[![NuGet](https://img.shields.io/nuget/dt/nanoFramework.Windows.Devices.Gpio.svg)]() [![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=nanoframework/lib-Windows.Devices.Gpio)](https://dependabot.com) [![#yourfirstpr](https://img.shields.io/badge/first--timers--only-friendly-blue.svg)](https://github.com/nanoframework/Home/blob/master/CONTRIBUTING.md)  [![Discord](https://img.shields.io/discord/478725473862549535.svg)](https://discord.gg/gCyBu8T)
 
 
 ![nanoFramework logo](https://github.com/nanoframework/Home/blob/master/resources/logo/nanoFramework-repo-logo.png)
