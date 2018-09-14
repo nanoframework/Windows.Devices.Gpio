@@ -18,7 +18,7 @@ namespace Windows.Devices.Gpio
     /// <summary>
     /// Represents a general-purpose I/O (GPIO) pin.
     /// </summary>
-    public sealed class Gpio​Pin : IDisposable
+    public sealed class Gpio​Pin : IGpioPin, IDisposable
     {
         private static GpioPinEventListener s_eventListener = new GpioPinEventListener();
 

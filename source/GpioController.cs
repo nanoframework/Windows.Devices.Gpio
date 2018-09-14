@@ -11,7 +11,7 @@ namespace Windows.Devices.Gpio
     /// Represents the default general-purpose I/O (GPIO) controller for the system.
     /// </summary>
     /// <remarks>To get a <see cref="Gpio​Controller"/> object, use the <see cref="GetDefault"/> method.</remarks>
-    public sealed class Gpio​Controller
+    public sealed class Gpio​Controller : IGpioController
     {
         // we can have only one instance of the GpioController
         private static GpioController s_instance = new GpioController();
@@ -165,5 +165,26 @@ namespace Windows.Devices.Gpio
                 return false;
             }
         }
+
+        #region IGpioController 
+        bool IGpioController.TryOpenPin(int pinNumber, GpioSharingMode sharingMode, out IGpioPin pin, out GpioOpenStatus openStatus)
+        {
+            var result = TryOpenPin(pinNumber, sharingMode, out var p, out var os);
+            pin = p;
+            openStatus = os;
+
+            return result;
+        }
+
+        IGpioPin IGpioController.OpenPin(int pinNumber)
+        {
+            return OpenPin(pinNumber);
+        }
+
+        IGpioPin IGpioController.OpenPin(int pinNumber, GpioSharingMode sharingMode)
+        {
+            return OpenPin(pinNumber, sharingMode);
+        }
+        #endregion
     }
 }
