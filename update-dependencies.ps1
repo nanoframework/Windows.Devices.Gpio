@@ -21,6 +21,7 @@ else
         # init/reset these
         $commitMessage = ""
         $prTitle = ""
+        $projectPath = ""
         $newBranchName = "$env:APPVEYOR_REPO_BRANCH-nfbot/update-dependencies"
     
         "Updating $library" | Write-Host -ForegroundColor White
@@ -47,8 +48,8 @@ else
         if ($packageCount -gt 0)
         {
             # get packages to update
-            $packageListRaw = [regex]::Match($nukeeperInspect, "(?>possible updates([^$]*)Found)").captures.Groups[1].Value;
-            [array]$packageList = $packageListRaw.Split([Environment]::NewLine, [StringSplitOptions]::RemoveEmptyEntries).Replace([Environment]::NewLine, "")
+            $packageListRaw = [regex]::Match($nukeeperInspect, "(?>possible updates([^$]*)(?=Found))").captures.Groups[1].value -replace "(\\packages.config)",  [Environment]::NewLine
+            [array]$packageList = $packageListRaw -split [Environment]::NewLine
 
             # restore NuGet packages, need to do this before anything else
             nuget restore $solutionFile[0] -Source https://www.myget.org/F/nanoframework-dev/api/v3/index.json -Source https://api.nuget.org/v3/index.json
@@ -64,6 +65,9 @@ else
             # update all packages
             foreach ($package in $packageList)
             {
+                # handle empty packages
+                if($package.Trim() -eq "") {continue}
+
                 # get package name and target version
                 $packageDetails = [regex]::Match($package, "(.*)(( from)(.*)(to )(.*)( in))")
                 $packageName = $packageDetails.captures.Groups[1].Value.Trim();
@@ -71,10 +75,13 @@ else
                 $packageTargetVersion = $packageDetails.captures.Groups[6].Value.Trim();
     
                 # update package
-                $updatePackage = nuget update $solutionFile[0].FullName -Source https://www.myget.org/F/nanoframework-dev/api/v3/index.json -Source https://api.nuget.org/v3/index.json
+                $updatePackage = nuget update $solutionFile[0].FullName -Source https://www.myget.org/F/nanoframework-dev/api/v3/index.json -Source https://api.nuget.org/v3/index.json $updatePackage = nuget update $solutionFile[0].FullName -Source https://www.myget.org/F/nanoframework-dev/api/v3/index.json -Source https://api.nuget.org/v3/index.json -Id $packageName -Version $packageTargetVersion 
 
-                #  grab csproj from update output
-                $projectPath = [regex]::Match($updatePackage, "((project ')(.*)(', targeting))").captures.Groups[3].Value
+                #  grab csproj from update output, if not already there
+                if($projectPath -eq "")
+                {
+                    $projectPath = [regex]::Match($updatePackage, "((project ')(.*)(', targeting))").captures.Groups[3].Value
+                }
 
                 # replace NFMDP_PE_LoadHints
                 $filecontent = Get-Content($projectPath)
@@ -94,11 +101,15 @@ else
 
                     foreach ($node in $nodes)
                     {
-                        $name = $node.Name;
-
-                        if(($node.Name -eq "ItemGroup") -and (($node.ChildNodes[0].Name -eq "Dependency") -and $node.ChildNodes[0].Attributes["Include"].value -eq $packageName))
+                        if($node.Name -eq "ItemGroup")
                         {
-                            $node.ChildNodes[0].ChildNodes[0].innertext = "[$packageTargetVersion]"
+                            foreach ($itemGroup in $node.ChildNodes)
+                            {
+                                if($itemGroup.Name -eq "Dependency" -and $itemGroup.Attributes["Include"].value -eq $packageName)
+                                {
+                                    $itemGroup.ChildNodes[0].innertext = "[$packageTargetVersion]"
+                                }
+                            }
                         }
                     }
 
