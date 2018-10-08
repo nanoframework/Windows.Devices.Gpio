@@ -17,7 +17,7 @@ else
         # init/reset these
         $commitMessage = ""
         $prTitle = ""
-        $newBranchName = "nfbot/update-dependencies"
+        $newBranchName = "$env:APPVEYOR_REPO_BRANCH-nfbot/update-dependencies"
     
         "Updating $library" | Write-Host -ForegroundColor White
    

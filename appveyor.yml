@@ -100,7 +100,7 @@
 
         .\appveyor-discord.ps1 failure $env:APPVEYOR_DISCORD_WEBHOOK_URL
 
-  after_deploy:
+  on_success:
     - dotnet tool install --global NuKeeper
     - ps: .\update-dependencies.ps1
 
@@ -182,7 +182,7 @@
 
       msbuild source\nanoFramework.Windows.Devices.Gpio.sln /p:Configuration=Release /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 
-  on_success:
+  after_deploy:
   # for this environment variable to work here it has to be set in AppVeyor UI
   - nuget push source\Nuget.Windows.Devices.Gpio\bin\Release\nanoFramework.Windows.Devices.Gpio.%GitVersion_NuGetVersionV2%.nupkg %MyGetToken% -Source https://www.myget.org/F/nanoframework-dev/api/v2/package
   - nuget push source\Nuget.Windows.Devices.Gpio.DELIVERABLES\bin\Release\nanoFramework.Windows.Devices.Gpio.DELIVERABLES.%GitVersion_NuGetVersionV2%.nupkg %MyGetToken% -Source https://www.myget.org/F/nanoframework-dev/api/v2/package
@@ -217,7 +217,7 @@
 
         .\appveyor-discord.ps1 failure $env:APPVEYOR_DISCORD_WEBHOOK_URL
 
-  after_deploy:
+  on_success:
     - dotnet tool install --global NuKeeper
     - ps: .\update-dependencies.ps1
 
@@ -286,7 +286,7 @@
 
       msbuild source\nanoFramework.Windows.Devices.Gpio.sln /p:Configuration=Release /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 
-  on_success:
+  after_deploy:
   # for this environment variable to work here it has to be set in AppVeyor UI
   - nuget push source\Nuget.Windows.Devices.Gpio\bin\Release\Windows.Devices.Gpio.%GitVersion_NuGetVersionV2%.nupkg %MyGetToken% -Source https://www.myget.org/F/nanoframework-dev/api/v2/package
   - nuget push source\Nuget.Windows.Devices.Gpio.DELIVERABLES\bin\Release\Windows.Devices.Gpio.DELIVERABLES.%GitVersion_NuGetVersionV2%.nupkg %MyGetToken% -Source https://www.myget.org/F/nanoframework-dev/api/v2/package
@@ -321,7 +321,7 @@
 
         .\appveyor-discord.ps1 failure $env:APPVEYOR_DISCORD_WEBHOOK_URL
 
-  after_deploy:
+  on_success:
     - dotnet tool install --global NuKeeper
     - ps: .\update-dependencies.ps1
 
