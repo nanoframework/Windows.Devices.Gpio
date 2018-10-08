@@ -18,6 +18,7 @@
 
 **Documentation and other chores:**
 
+- Update 2 NuGet dependencies [\#41](https://github.com/nanoframework/lib-Windows.Devices.Gpio/pull/41)
 - Update 2 NuGet dependencies [\#40](https://github.com/nanoframework/lib-Windows.Devices.Gpio/pull/40)
 - Updating xml comments for documentation of IGpioController and IGpioPin interfaces. [\#31](https://github.com/nanoframework/lib-Windows.Devices.Gpio/pull/31)
 - Bump nanoFramework.Runtime.Events from 1.0.0-preview188 to 1.0.0-preview191 in /source [\#30](https://github.com/nanoframework/lib-Windows.Devices.Gpio/pull/30)
