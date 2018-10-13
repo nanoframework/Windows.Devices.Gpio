@@ -139,8 +139,8 @@ for:
 
   after_deploy:
   # for this environment variable to work here it has to be set in AppVeyor UI
-  - nuget push source\Nuget.Windows.Devices.Gpio\bin\Release\Windows.Devices.Gpio.%GitVersion_NuGetVersionV2%.nupkg %MyGetToken% -Source https://www.myget.org/F/nanoframework-dev/api/v2/package
-  - nuget push source\Nuget.Windows.Devices.Gpio.DELIVERABLES\bin\Release\Windows.Devices.Gpio.DELIVERABLES.%GitVersion_NuGetVersionV2%.nupkg %MyGetToken% -Source https://www.myget.org/F/nanoframework-dev/api/v2/package
+  - nuget push source\Nuget.Windows.Devices.Gpio\bin\Release\nanoFramework.Windows.Devices.Gpio.%GitVersion_NuGetVersionV2%.nupkg %MyGetToken% -Source https://www.myget.org/F/nanoframework-dev/api/v2/package
+  - nuget push source\Nuget.Windows.Devices.Gpio.DELIVERABLES\bin\Release\nanoFramework.Windows.Devices.Gpio.DELIVERABLES.%GitVersion_NuGetVersionV2%.nupkg %MyGetToken% -Source https://www.myget.org/F/nanoframework-dev/api/v2/package
 
 -
   branches:
@@ -161,5 +161,5 @@ for:
 
   after_deploy:
   # for this environment variable to work here it has to be set in AppVeyor UI
-  - nuget push source\Nuget.Windows.Devices.Gpio\bin\Release\Windows.Devices.Gpio.%GitVersion_NuGetVersionV2%.nupkg %MyGetToken% -Source https://www.myget.org/F/nanoframework-dev/api/v2/package
-  - nuget push source\Nuget.Windows.Devices.Gpio.DELIVERABLES\bin\Release\Windows.Devices.Gpio.DELIVERABLES.%GitVersion_NuGetVersionV2%.nupkg %MyGetToken% -Source https://www.myget.org/F/nanoframework-dev/api/v2/package
+  - nuget push source\Nuget.Windows.Devices.Gpio\bin\Release\nanoFramework.Windows.Devices.Gpio.%GitVersion_NuGetVersionV2%.nupkg %MyGetToken% -Source https://www.myget.org/F/nanoframework-dev/api/v2/package
+  - nuget push source\Nuget.Windows.Devices.Gpio.DELIVERABLES\bin\Release\nanoFramework.Windows.Devices.Gpio.DELIVERABLES.%GitVersion_NuGetVersionV2%.nupkg %MyGetToken% -Source https://www.myget.org/F/nanoframework-dev/api/v2/package
