@@ -96,7 +96,7 @@ else
                 $packageTargetVersion = $packageDetails.captures.Groups[6].Value.Trim();
     
                 # update package
-                if ($env:APPVEYOR_REPO_BRANCH -like '*release*' -or $string -like '*master*')
+                if ($env:APPVEYOR_REPO_BRANCH -like '*release*' -or $env:APPVEYOR_REPO_BRANCH -like '*master*')
                 {
                     # use NuGet ONLY for release and master branches
                     $updatePackage = nuget update $solutionFile[0].FullName -Source https://api.nuget.org/v3/index.json
