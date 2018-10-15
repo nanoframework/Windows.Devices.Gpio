@@ -75,7 +75,7 @@ else
                 $packageTargetVersion = $packageDetails.captures.Groups[6].Value.Trim();
     
                 # update package
-                $updatePackage = nuget update $solutionFile[0].FullName -Source https://www.myget.org/F/nanoframework-dev/api/v3/index.json -Source https://api.nuget.org/v3/index.json $updatePackage = nuget update $solutionFile[0].FullName -Source https://www.myget.org/F/nanoframework-dev/api/v3/index.json -Source https://api.nuget.org/v3/index.json -Id $packageName -Version $packageTargetVersion 
+                $updatePackage = nuget update $solutionFile[0].FullName -Source https://www.myget.org/F/nanoframework-dev/api/v3/index.json -Source https://api.nuget.org/v3/index.json -Id $packageName -Version $packageTargetVersion 
 
                 #  grab csproj from update output, if not already there
                 if($projectPath -eq "")
