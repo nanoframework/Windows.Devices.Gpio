@@ -118,8 +118,7 @@ for:
     draft: true
     prerelease: false
     force_update: true
-    on:
-      appveyor_repo_tag: true
+
 -
   branches:
     only:
@@ -138,8 +137,6 @@ for:
     draft: true
     prerelease: true
     force_update: true
-    on:
-      appveyor_repo_tag: true
 
   after_deploy:
   # for this environment variable to work here it has to be set in AppVeyor UI
@@ -167,5 +164,3 @@ for:
     draft: true
     prerelease: true
     force_update: true
-    on:
-      appveyor_repo_tag: true
