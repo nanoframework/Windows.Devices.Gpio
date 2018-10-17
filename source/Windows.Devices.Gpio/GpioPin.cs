@@ -18,7 +18,7 @@ namespace Windows.Devices.Gpio
     /// <summary>
     /// Represents a general-purpose I/O (GPIO) pin.
     /// </summary>
-    public sealed class Gpio​Pin : IDisposable
+    public sealed class Gpio​Pin : IGpioPin, IDisposable
     {
         private static GpioPinEventListener s_eventListener = new GpioPinEventListener();
 
@@ -32,6 +32,11 @@ namespace Windows.Devices.Gpio
         private GpioPinValueChangedEventHandler _callbacks = null;
         private GpioPinValue _lastOutputValue = GpioPinValue.Low;
 
+        #pragma warning disable 0414
+        // this field is used in native so it must be kept here despite "not being used"
+        private GpioPinValue _lastInputValue = GpioPinValue.Low;
+        #pragma warning restore 0414
+
         internal Gpio​Pin(int pinNumber)
         {
             _pinNumber = pinNumber;
@@ -41,7 +46,7 @@ namespace Windows.Devices.Gpio
         {
             if(NativeInit(_pinNumber))
             {
-                // add the pin to the event listner in order to receive the callbacks from the native interrupts
+                // add the pin to the event listener in order to receive the callbacks from the native interrupts
                 s_eventListener.AddPin(_pinNumber, this);
 
                 return true;
@@ -161,8 +166,6 @@ namespace Windows.Devices.Gpio
                 // check if pin has been disposed
                 if (_disposedValue) { throw new ObjectDisposedException(); }
 
-                if (_driveMode == value) return;
-
                 // check if the request drive mode is supported
                 // need to call the native method directly because we are already inside a lock
                 if (NativeIsDriveModeSupported(value))
@@ -206,20 +209,17 @@ namespace Windows.Devices.Gpio
                     // native write
                     WriteNative(value);
 
-                    // update mmemory field
-                    _lastOutputValue = value;
-
                     // trigger the pin value changed event, if any is set
                     GpioPinValueChangedEventHandler callbacks = _callbacks;
 
-                    if (_lastOutputValue == GpioPinValue.High)
+                    if (_lastOutputValue == GpioPinValue.Low)
                     {
-                        // last value is HIGH, so now it's LOW
+                        // last value is now LOW, so it was HIGH
                         callbacks?.Invoke(this, new GpioPinValueChangedEventArgs(GpioPinEdge.FallingEdge));
                     }
                     else
                     {
-                        // last value is LOW, so now it's HIGH
+                        // last value is now HIGH, so it was LOW
                         callbacks?.Invoke(this, new GpioPinValueChangedEventArgs(GpioPinEdge.RisingEdge));
                     }
                 }
@@ -283,7 +283,7 @@ namespace Windows.Devices.Gpio
         }
 
         /// <summary>
-        /// Handles internal events and re-dispatches them to the publicly subsribed delegates.
+        /// Handles internal events and re-dispatches them to the publicly subscribed delegates.
         /// </summary>
         /// <param name="edge">The state transition for this event.</param>
         internal void OnPinChangedInternal(GpioPinEdge edge)
@@ -300,6 +300,16 @@ namespace Windows.Devices.Gpio
 
             callbacks?.Invoke(this, new GpioPinValueChangedEventArgs(edge));
         }
+
+        /// <summary>
+        /// Toggles the output of the general purpose I/O (GPIO) pin if the pin is configured as an output.
+        /// </summary>
+        /// <remarks>
+        /// This method is exclusive of nanoFramework and it's not available in the UWP API.
+        /// </remarks>
+        [MethodImpl(MethodImplOptions.InternalCall)]
+        public extern void Toggle();
+
 
         #region IDisposable Support
 
@@ -345,7 +355,7 @@ namespace Windows.Devices.Gpio
 
         #endregion
 
-        #region extenal calls to native implementations
+        #region external calls to native implementations
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         private extern bool NativeIsDriveModeSupported(GpioPinDriveMode driveMode);
@@ -361,6 +371,9 @@ namespace Windows.Devices.Gpio
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         private extern void WriteNative(GpioPinValue value);
+
+        [MethodImpl(MethodImplOptions.InternalCall)]
+        internal extern void NativeSetAlternateFunction(int alternateFunction);
 
         #endregion
     }
