@@ -1,7 +1,6 @@
 # Change Log
 
-## [**Changes available only in 'Preview' NuGet packages:**](https://github.com/nanoframework/lib-Windows.Devices.Gpio/tree/HEAD)
-
+## [v1.0.0](https://github.com/nanoframework/lib-Windows.Devices.Gpio/tree/v1.0.0) (2018-10-17)
 **Implemented enhancements:**
 
 - Added interfaces for IGpioController and IGpioPin  [\#28](https://github.com/nanoframework/lib-Windows.Devices.Gpio/pull/28)
@@ -18,6 +17,7 @@
 
 **Documentation and other chores:**
 
+- Update 2 NuGet dependencies [\#46](https://github.com/nanoframework/lib-Windows.Devices.Gpio/pull/46)
 - Update 2 NuGet dependencies [\#42](https://github.com/nanoframework/lib-Windows.Devices.Gpio/pull/42)
 - Update 2 NuGet dependencies [\#41](https://github.com/nanoframework/lib-Windows.Devices.Gpio/pull/41)
 - Update 2 NuGet dependencies [\#40](https://github.com/nanoframework/lib-Windows.Devices.Gpio/pull/40)
