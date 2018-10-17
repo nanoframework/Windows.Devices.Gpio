@@ -1,10 +1,13 @@
 # Copyright (c) 2018 The nanoFramework project contributors
 # See LICENSE file in the project root for full license information.
 
-# only need to update dependencies when build is NOT for a pull-request
-if ($env:appveyor_pull_request_number)
+# skip updating dependencies if build is a pull-request or not a tag (master OR release)
+if ($env:appveyor_pull_request_number -or 
+    ($env:APPVEYOR_REPO_BRANCH -eq "master" -and $env:APPVEYOR_REPO_TAG -eq 'false') -or
+    ($env:APPVEYOR_REPO_BRANCH -match "^release*" -and $env:APPVEYOR_REPO_TAG -eq 'false') -or
+    $env:APPVEYOR_REPO_TAG -eq "false")
 {
-    'Skip updating dependencies as this is a PR build...' | Write-Host -ForegroundColor White
+    'Skip updating dependencies...' | Write-Host -ForegroundColor White
 }
 else
 {
@@ -40,16 +43,7 @@ else
         $solutionFile = (Get-ChildItem -Path ".\" -Include "*.sln" -Recurse)
 
         # run NuKeeper inspect
-        if ($env:APPVEYOR_REPO_BRANCH -like '*release*' -or $env:APPVEYOR_REPO_BRANCH -like '*master*')
-        {
-            # use NuGet ONLY for release and master branches
-            $nukeeperInspect = NuKeeper inspect --source https://api.nuget.org/v3/index.json
-        }
-        else
-        {
-            # use NuGet and MyGet for all others
-            $nukeeperInspect = NuKeeper inspect
-        }
+        $nukeeperInspect = NuKeeper inspect
 
         "NuGet update inspection result:" | Write-Host -ForegroundColor Cyan
         $nukeeperInspect | Write-Host -ForegroundColor White
@@ -65,16 +59,7 @@ else
             [array]$packageList = $packageListRaw -split [Environment]::NewLine
 
             # restore NuGet packages, need to do this before anything else
-            if ($env:APPVEYOR_REPO_BRANCH -like '*release*' -or $env:APPVEYOR_REPO_BRANCH -like '*master*')
-            {
-                # use NuGet ONLY for release and master branches
-                nuget restore $solutionFile[0] -Source https://api.nuget.org/v3/index.json
-            }
-            else
-            {
-                # use NuGet and MyGet for all others
-                nuget restore $solutionFile[0] -Source https://www.myget.org/F/nanoframework-dev/api/v3/index.json -Source https://api.nuget.org/v3/index.json                
-            }
+            nuget restore $solutionFile[0] -Source https://www.myget.org/F/nanoframework-dev/api/v3/index.json -Source https://api.nuget.org/v3/index.json                
 
             # rename nfproj files to csproj
             Get-ChildItem -Path ".\" -Include "*.nfproj" -Recurse |
@@ -97,16 +82,7 @@ else
                 $packageTargetVersion = $packageDetails.captures.Groups[6].Value.Trim();
     
                 # update package
-                if ($env:APPVEYOR_REPO_BRANCH -like '*release*' -or $env:APPVEYOR_REPO_BRANCH -like '*master*')
-                {
-                    # use NuGet ONLY for release and master branches
-                    $updatePackage = nuget update $solutionFile[0].FullName -Source https://api.nuget.org/v3/index.json
-                }
-                else
-                {
-                    # use NuGet and MyGet for all others
-                    $updatePackage = nuget update $solutionFile[0].FullName -Source https://www.myget.org/F/nanoframework-dev/api/v3/index.json -Source https://api.nuget.org/v3/index.json
-                }
+                $updatePackage = nuget update $solutionFile[0].FullName -Source https://www.myget.org/F/nanoframework-dev/api/v3/index.json -Source https://api.nuget.org/v3/index.json
 
                 #  grab csproj from update output, if not already there
                 if($projectPath -eq "")
@@ -197,7 +173,10 @@ else
             git push --set-upstream origin $newBranchName --porcelain -q
 
             # start PR
-            $prRequestBody = @{title="$prTitle";body="$commitMessage";head="$newBranchName";base="$env:APPVEYOR_REPO_BRANCH"} | ConvertTo-Json
+            # we are hardcoding to develop branch to have a fixed one
+            # this is very important for tags (which don't have branch information)
+            # considering that the base branch can be changed at the PR ther is no big deal about this 
+            $prRequestBody = @{title="$prTitle";body="$commitMessage";head="$newBranchName";base="develop"} | ConvertTo-Json
             $githubApiEndpoint = "https://api.github.com/repos/nanoframework/$library/pulls"
             [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
