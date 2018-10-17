@@ -11,8 +11,12 @@ namespace Windows.Devices.Gpio
     public sealed class GpioPinValueChangedEventArgs
     {
         private GpioPinEdge _edge;
-
-        internal GpioPinValueChangedEventArgs(GpioPinEdge edge)
+     
+        /// <summary>
+        /// Creats a new instance of the GpioPinValueChangedEventArgs class
+        /// </summary>
+        /// <param name="edge">An enumeration value that indicates the type of change that occurred to the value of the GPIO pin for the GpioPin.ValueChanged event.</param>
+        public GpioPinValueChangedEventArgs(GpioPinEdge edge)
         {
             _edge = edge;
         }
