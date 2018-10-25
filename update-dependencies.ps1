@@ -42,21 +42,29 @@ else
         # find solution file in repository
         $solutionFile = (Get-ChildItem -Path ".\" -Include "*.sln" -Recurse)
 
-        # run NuKeeper inspect
-        $nukeeperInspect = NuKeeper inspect
+        # find packages.config
+        $packagesConfig = (Get-ChildItem -Path ".\" -Include "packages.config" -Recurse)
 
-        "NuGet update inspection result:" | Write-Host -ForegroundColor Cyan
-        $nukeeperInspect | Write-Host -ForegroundColor White
+        # load packages.config as XML doc
+        [xml]$packagesDoc = Get-Content $packagesConfig
 
-        $packageCountMatch = [regex]::Match($nukeeperInspect, "Found (\d) possible updates").captures.groups[1].value
-        [int]$packageCount = 0
-        [int]::TryParse($packageCountMatch, [ref]$packageCount)
+        $nodes = $packagesDoc.SelectNodes("*").SelectNodes("*")
 
-        if ($packageCount -gt 0)
+        $packageList = @()
+
+        foreach ($node in $nodes)
         {
-            # get packages to update
-            $packageListRaw = [regex]::Match($nukeeperInspect, "(?>possible updates([^$]*)(?=Found))").captures.Groups[1].value -replace "(\\packages.config)",  [Environment]::NewLine
-            [array]$packageList = $packageListRaw -split [Environment]::NewLine
+            # filter out NuProj packages
+            if($node.id -notlike "NuProj*")
+            {
+                $packageList += $node.id
+            }
+        }
+
+        if ($packageList.length -gt 0)
+        {
+            "NuGet packages to update:" | Write-Host -ForegroundColor White
+            $packageList | Write-Host -ForegroundColor White
 
             # restore NuGet packages, need to do this before anything else
             nuget restore $solutionFile[0] -Source https://www.myget.org/F/nanoframework-dev/api/v3/index.json -Source https://api.nuget.org/v3/index.json                
