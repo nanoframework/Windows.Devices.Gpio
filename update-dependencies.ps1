@@ -57,8 +57,8 @@ else
 
         foreach ($node in $nodes)
         {
-            # filter out NuProj packages
-            if($node.id -notlike "NuProj*")
+            # filter out Nerdbank.GitVersioning package
+            if($node.id -notlike "Nerdbank.GitVersioning*")
             {
                 if($packageList)
                 {
@@ -90,7 +90,7 @@ else
             # update all packages
             foreach ($package in $packageList)
             {
-                # get package name and origin version
+                # get package name and target version
                 $packageName = $package[0]
                 $packageOriginVersion = $package[1]
     
@@ -105,7 +105,7 @@ else
                     # allow prerelease for all others
                     $updatePackage = nuget update $solutionFile[0].FullName -Source https://www.myget.org/F/nanoframework-dev/api/v3/index.json -Source https://api.nuget.org/v3/index.json -PreRelease
                 }
-               
+
                 # need to get target version
                 # load packages.config as XML doc
                 [xml]$packagesDoc = Get-Content $packagesConfig
@@ -129,32 +129,36 @@ else
                 attrib $projectPath -r
                 $filecontent -replace "($packageName.$packageOriginVersion)", "$packageName.$packageTargetVersion" | Out-File $projectPath -Encoding utf8
 
-                # update nuproj files, if any
-                $nuprojFiles = (Get-ChildItem -Path ".\" -Include "*.nuproj" -Recurse)
+                # update nuspec files, if any
+                $nuspecFiles = (Get-ChildItem -Path ".\" -Include "*.nuspec" -Recurse)
 
-                foreach ($nuproj in $nuprojFiles)
+                foreach ($nuspec in $nuspecFiles)
                 {
-                    [xml]$nuprojDoc = Get-Content $nuproj
+                    [xml]$nuspecDoc = Get-Content $nuspec
 
-                    #$nuprojDoc.Project.ItemGroup
-
-                    $nodes = $nuprojDoc.SelectNodes("*").SelectNodes("*")
+                    $nodes = $nuspecDoc.SelectNodes("*").SelectNodes("*")
 
                     foreach ($node in $nodes)
                     {
-                        if($node.Name -eq "ItemGroup")
+                        if($node.Name -eq "metadata")
                         {
-                            foreach ($itemGroup in $node.ChildNodes)
-                            {
-                                if($itemGroup.Name -eq "Dependency" -and $itemGroup.Attributes["Include"].value -eq $packageName)
+                            foreach ($metadataItem in $node.ChildNodes)
+                            {                          
+                                if($metadataItem.Name -eq "dependencies")
                                 {
-                                    $itemGroup.ChildNodes[0].innertext = "[$packageTargetVersion]"
+                                    foreach ($dependency in $metadataItem.ChildNodes)
+                                    {
+                                        if($dependency.Attributes["id"].value -eq $packageName)
+                                        {
+                                            $dependency.Attributes["version"].value = "[$packageTargetVersion]"
+                                        }
+                                    }
                                 }
                             }
                         }
                     }
 
-                    $nuprojDoc.Save($nuproj[0].FullName)
+                    $nuspecDoc.Save($nuspec[0].FullName)
                 }
 
                 #  update branch name

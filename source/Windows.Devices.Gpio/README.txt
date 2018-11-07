@@ -2,4 +2,4 @@
 
 1. After updating the Nuget packages, the project file (nfproj extension) has to be manually edited too in order to update the path for the new package for all <NFMDP_PE_LoadHints> tags.
 
-2. The nuproj files (in nanoFramework.Windows.Devices.Gpio.Nuget.sln) have to be manually updated for the dependency versions to match the referenced packages.
+2. The nuspec files  have to be manually updated for the dependency versions to match the referenced packages.
