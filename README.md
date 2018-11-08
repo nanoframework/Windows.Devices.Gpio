@@ -12,7 +12,7 @@
 
 | Component | Build Status | NuGet Package |
 |:-|---|---|
-| Windows.Devices.Gpio | [![Build status](https://ci.appveyor.com/api/projects/status/rx2hrsucsn1p0ohd/branch/master?svg=true)](https://ci.appveyor.com/project/nfbot/lib-windows-devices-gpio/branch/master) | [![NuGet](https://img.shields.io/nuget/vpre/nanoFramework.Windows.Devices.Gpio.svg)](https://www.nuget.org/packages/nanoFramework.Windows.Devices.Gpio/)  |
+| Windows.Devices.Gpio | [![Build status](https://ci.appveyor.com/api/projects/status/rx2hrsucsn1p0ohd/branch/master?svg=true)](https://ci.appveyor.com/project/nfbot/lib-windows-devices-gpio/branch/master) | [![NuGet](https://img.shields.io/nuget/v/nanoFramework.Windows.Devices.Gpio.svg)](https://www.nuget.org/packages/nanoFramework.Windows.Devices.Gpio/)  |
 | Windows.Devices.Gpio (preview) | [![Build status](https://ci.appveyor.com/api/projects/status/rx2hrsucsn1p0ohd/branch/develop?svg=true)](https://ci.appveyor.com/project/nfbot/lib-windows-devices-gpio/branch/develop) | [![MyGet Pre Release](https://img.shields.io/myget/nanoframework-dev/vpre/nanoFramework.Windows.Devices.Gpio.svg)](https://www.myget.org/feed/nanoframework-dev/package/nuget/nanoFramework.Windows.Devices.Gpio) |
 
 ## Feedback and documentation
