@@ -6,6 +6,7 @@
 
 **Documentation and other chores:**
 
+- Bumps nanoFramework.Runtime.Events from 1.0.0 to 1.0.2-preview-004 [\#56](https://github.com/nanoframework/lib-Windows.Devices.Gpio/pull/56)
 - Merge back changes from Release 1.0.0 [\#51](https://github.com/nanoframework/lib-Windows.Devices.Gpio/pull/51)
 
 ## [v1.0.0](https://github.com/nanoframework/lib-Windows.Devices.Gpio/tree/v1.0.0) (2018-10-17)
