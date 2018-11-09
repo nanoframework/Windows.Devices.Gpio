@@ -13,8 +13,13 @@ namespace Windows.Devices.Gpio
     /// <remarks>To get a <see cref="Gpio​Controller"/> object, use the <see cref="GetDefault"/> method.</remarks>
     public sealed class Gpio​Controller : IGpioController
     {
+        // this is used as the lock object 
+        // a lock is required because multiple threads can access the I2C controller
+        readonly static object _syncLock = new object();
+
         // we can have only one instance of the GpioController
-        private static GpioController s_instance = new GpioController();
+        // need to do a lazy initialization of this field to make sure it exists when called elsewhere.
+        private static GpioController s_instance;
 
         /// <summary>
         /// Gets the number of pins on the general-purpose I/O (GPIO) controller.
@@ -49,6 +54,17 @@ namespace Windows.Devices.Gpio
         /// <returns>The default GPIO controller for the system, or null if the system has no GPIO controller.</returns>
         public static Gpio​Controller GetDefault()
         {
+            if (s_instance == null)
+            {
+                lock (_syncLock)
+                {
+                    if (s_instance == null)
+                    {
+                        s_instance = new Gpio​Controller();
+                    }
+                }
+            }
+
             return s_instance;
         }
 
