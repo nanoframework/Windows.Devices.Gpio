@@ -55,9 +55,9 @@ steps:
   inputs:
     gitHubToken: $(GitHubToken)
     repositoriesToUpdate: |
-      'lib-nanoFramework.Hardware.Esp32'
+      lib-nanoFramework.Hardware.Esp32
   condition: and( succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/v') )
-  displayName: Update assembly declaration in nf-interpreter
+  displayName: Update dependent class libs
 
 # step from template @ nf-tools repo
 # report error
