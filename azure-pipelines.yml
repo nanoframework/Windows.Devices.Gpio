@@ -39,7 +39,7 @@ variables:
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
   nugetPackageName: 'nanoFramework.Windows.Devices.Gpio'
-  repoName: 'lib-Windows.Devices.Gpio '
+  repoName: 'lib-Windows.Devices.Gpio'
 
 steps:
 
