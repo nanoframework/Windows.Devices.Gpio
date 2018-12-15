@@ -1,5 +1,44 @@
 # Change Log
 
+## [v1.0.2-preview-025](https://github.com/nanoframework/lib-Windows.Devices.Gpio/tree/v1.0.2-preview-025) (2018-12-03)
+[Full Changelog](https://github.com/nanoframework/lib-Windows.Devices.Gpio/compare/v1.0.2-preview-023...v1.0.2-preview-025)
+
+**Documentation and other chores:**
+
+- Bumps nanoFramework.Runtime.Events from 1.0.2-preview-021 to 1.0.2-preview-023 [\#63](https://github.com/nanoframework/lib-Windows.Devices.Gpio/pull/63)
+
+## [v1.0.2-preview-023](https://github.com/nanoframework/lib-Windows.Devices.Gpio/tree/v1.0.2-preview-023) (2018-11-30)
+[Full Changelog](https://github.com/nanoframework/lib-Windows.Devices.Gpio/compare/v1.0.2-preview-018...v1.0.2-preview-023)
+
+**Documentation and other chores:**
+
+- Update 2 NuGet dependencies [\#62](https://github.com/nanoframework/lib-Windows.Devices.Gpio/pull/62)
+
+## [v1.0.2-preview-018](https://github.com/nanoframework/lib-Windows.Devices.Gpio/tree/v1.0.2-preview-018) (2018-11-28)
+[Full Changelog](https://github.com/nanoframework/lib-Windows.Devices.Gpio/compare/v1.0.2-preview-015...v1.0.2-preview-018)
+
+## [v1.0.2-preview-015](https://github.com/nanoframework/lib-Windows.Devices.Gpio/tree/v1.0.2-preview-015) (2018-11-20)
+[Full Changelog](https://github.com/nanoframework/lib-Windows.Devices.Gpio/compare/v1.0.2-preview-008...v1.0.2-preview-015)
+
+**Documentation and other chores:**
+
+- Update 2 NuGet dependencies [\#60](https://github.com/nanoframework/lib-Windows.Devices.Gpio/pull/60)
+
+## [v1.0.2-preview-008](https://github.com/nanoframework/lib-Windows.Devices.Gpio/tree/v1.0.2-preview-008) (2018-11-09)
+[Full Changelog](https://github.com/nanoframework/lib-Windows.Devices.Gpio/compare/v1.0.2-preview-004...v1.0.2-preview-008)
+
+**Implemented enhancements:**
+
+- Add lazy initialization to SerialController [\#57](https://github.com/nanoframework/lib-Windows.Devices.Gpio/pull/57)
+
+## [v1.0.2-preview-004](https://github.com/nanoframework/lib-Windows.Devices.Gpio/tree/v1.0.2-preview-004) (2018-11-08)
+[Full Changelog](https://github.com/nanoframework/lib-Windows.Devices.Gpio/compare/v1.0.0...v1.0.2-preview-004)
+
+**Documentation and other chores:**
+
+- Bumps nanoFramework.Runtime.Events from 1.0.0 to 1.0.2-preview-004 [\#56](https://github.com/nanoframework/lib-Windows.Devices.Gpio/pull/56)
+- Merge back changes from Release 1.0.0 [\#51](https://github.com/nanoframework/lib-Windows.Devices.Gpio/pull/51)
+
 ## [v1.0.0](https://github.com/nanoframework/lib-Windows.Devices.Gpio/tree/v1.0.0) (2018-10-17)
 **Implemented enhancements:**
 
