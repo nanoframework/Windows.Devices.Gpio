@@ -6,6 +6,7 @@
 
 **Documentation and other chores:**
 
+- Update 2 NuGet dependencies [\#69](https://github.com/nanoframework/lib-Windows.Devices.Gpio/pull/69)
 - Merge back from Release v1.0.2 [\#68](https://github.com/nanoframework/lib-Windows.Devices.Gpio/pull/68)
 
 ## [v1.0.2](https://github.com/nanoframework/lib-Windows.Devices.Gpio/tree/v1.0.2) (2018-12-15)
