@@ -9,7 +9,6 @@
 
 **Documentation and other chores:**
 
-- Release v1.0.5 [\#73](https://github.com/nanoframework/lib-Windows.Devices.Gpio/pull/73)
 - merge back from Release v1.0.4 [\#71](https://github.com/nanoframework/lib-Windows.Devices.Gpio/pull/71)
 
 ## [v1.0.4](https://github.com/nanoframework/lib-Windows.Devices.Gpio/tree/v1.0.4) (2019-01-22)
