@@ -1,5 +1,17 @@
 # Change Log
 
+## [v1.0.5](https://github.com/nanoframework/lib-Windows.Devices.Gpio/tree/v1.0.5) (2019-02-04)
+[Full Changelog](https://github.com/nanoframework/lib-Windows.Devices.Gpio/compare/v1.0.4...v1.0.5)
+
+**Fixed bugs:**
+
+- Static field objects are now created on constructor. [\#72](https://github.com/nanoframework/lib-Windows.Devices.Gpio/pull/72)
+
+**Documentation and other chores:**
+
+- Release v1.0.5 [\#73](https://github.com/nanoframework/lib-Windows.Devices.Gpio/pull/73)
+- merge back from Release v1.0.4 [\#71](https://github.com/nanoframework/lib-Windows.Devices.Gpio/pull/71)
+
 ## [v1.0.4](https://github.com/nanoframework/lib-Windows.Devices.Gpio/tree/v1.0.4) (2019-01-22)
 [Full Changelog](https://github.com/nanoframework/lib-Windows.Devices.Gpio/compare/v1.0.2...v1.0.4)
 
