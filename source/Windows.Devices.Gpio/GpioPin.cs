@@ -20,11 +20,11 @@ namespace Windows.Devices.Gpio
     /// </summary>
     public sealed class Gpio​Pin : IGpioPin, IDisposable
     {
-        private static GpioPinEventListener s_eventListener = new GpioPinEventListener();
+        private static GpioPinEventListener s_eventListener;
 
         // this is used as the lock object 
         // a lock is required because multiple threads can access the GpioPin
-        private object _syncLock = new object();
+        private object _syncLock;
 
         private readonly int _pinNumber;
         private GpioPinDriveMode _driveMode = GpioPinDriveMode.Input;
@@ -40,6 +40,9 @@ namespace Windows.Devices.Gpio
         internal Gpio​Pin(int pinNumber)
         {
             _pinNumber = pinNumber;
+
+            s_eventListener = new GpioPinEventListener();
+            _syncLock = new object();
         }
 
         internal bool Init()
