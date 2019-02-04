@@ -15,7 +15,7 @@ namespace Windows.Devices.Gpio
     {
         // this is used as the lock object 
         // a lock is required because multiple threads can access the I2C controller
-        readonly static object _syncLock = new object();
+        static object _syncLock;
 
         // we can have only one instance of the GpioController
         // need to do a lazy initialization of this field to make sure it exists when called elsewhere.
@@ -56,6 +56,11 @@ namespace Windows.Devices.Gpio
         {
             if (s_instance == null)
             {
+                if (_syncLock == null)
+                {
+                    _syncLock = new object();
+                }
+
                 lock (_syncLock)
                 {
                     if (s_instance == null)
