@@ -41,8 +41,15 @@ namespace Windows.Devices.Gpio
         {
             _pinNumber = pinNumber;
 
-            s_eventListener = new GpioPinEventListener();
             _syncLock = new object();
+
+            lock (_syncLock)
+            {
+                if (s_eventListener == null)
+                {
+                    s_eventListener = new GpioPinEventListener();
+                }
+            }
         }
 
         internal bool Init()
