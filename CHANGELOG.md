@@ -2,7 +2,14 @@
 
 ## [**Changes available only in 'Preview' NuGet packages:**](https://github.com/nanoframework/lib-Windows.Devices.Gpio/tree/HEAD)
 
-[Full Changelog](https://github.com/nanoframework/lib-Windows.Devices.Gpio/compare/v1.0.5...HEAD)
+[Full Changelog](https://github.com/nanoframework/lib-Windows.Devices.Gpio/compare/v1.1.0-preview-003...HEAD)
+
+**Fixed bugs:**
+
+- Fix event listener creation on GpioPin [\#76](https://github.com/nanoframework/lib-Windows.Devices.Gpio/pull/76)
+
+## [v1.1.0-preview-003](https://github.com/nanoframework/lib-Windows.Devices.Gpio/tree/v1.1.0-preview-003) (2019-03-06)
+[Full Changelog](https://github.com/nanoframework/lib-Windows.Devices.Gpio/compare/v1.0.5...v1.1.0-preview-003)
 
 **Documentation and other chores:**
 
