@@ -2,7 +2,14 @@
 
 ## [**Changes available only in 'Preview' NuGet packages:**](https://github.com/nanoframework/lib-Windows.Devices.Gpio/tree/HEAD)
 
-[Full Changelog](https://github.com/nanoframework/lib-Windows.Devices.Gpio/compare/v1.1.0-preview-005...HEAD)
+[Full Changelog](https://github.com/nanoframework/lib-Windows.Devices.Gpio/compare/v1.1.0-preview-007...HEAD)
+
+**Documentation and other chores:**
+
+- Bumps nanoFramework.Runtime.Events from 1.0.5-preview-007 to 1.0.5-preview-008 [\#78](https://github.com/nanoframework/lib-Windows.Devices.Gpio/pull/78)
+
+## [v1.1.0-preview-007](https://github.com/nanoframework/lib-Windows.Devices.Gpio/tree/v1.1.0-preview-007) (2019-03-10)
+[Full Changelog](https://github.com/nanoframework/lib-Windows.Devices.Gpio/compare/v1.1.0-preview-005...v1.1.0-preview-007)
 
 **Documentation and other chores:**
 
