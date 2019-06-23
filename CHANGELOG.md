@@ -149,10 +149,6 @@
 ## [v1.0.2-preview-004](https://github.com/nanoframework/lib-Windows.Devices.Gpio/tree/v1.0.2-preview-004) (2018-11-08)
 [Full Changelog](https://github.com/nanoframework/lib-Windows.Devices.Gpio/compare/v1.0.0...v1.0.2-preview-004)
 
-**Implemented enhancements:**
-
-- Added interfaces for IGpioController and IGpioPin  [\#28](https://github.com/nanoframework/lib-Windows.Devices.Gpio/pull/28)
-
 **Documentation and other chores:**
 
 - Bumps nanoFramework.Runtime.Events from 1.0.0 to 1.0.2-preview-004 [\#56](https://github.com/nanoframework/lib-Windows.Devices.Gpio/pull/56)
@@ -161,6 +157,7 @@
 ## [v1.0.0](https://github.com/nanoframework/lib-Windows.Devices.Gpio/tree/v1.0.0) (2018-10-17)
 **Implemented enhancements:**
 
+- Added interfaces for IGpioController and IGpioPin  [\#28](https://github.com/nanoframework/lib-Windows.Devices.Gpio/pull/28)
 - Add toggle to GpioPin [\#14](https://github.com/nanoframework/lib-Windows.Devices.Gpio/pull/14)
 - Add field to hold last input value [\#10](https://github.com/nanoframework/lib-Windows.Devices.Gpio/pull/10)
 - Setting Gpio alternate funcion is now an extension [\#8](https://github.com/nanoframework/lib-Windows.Devices.Gpio/pull/8)
