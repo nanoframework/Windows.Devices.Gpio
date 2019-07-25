@@ -27,7 +27,7 @@ namespace Windows.Devices.Gpio
         private int _pinNumber;
         private bool _inputMode;
         private GpioChangePolarity _polarity = GpioChangePolarity.Falling;
-        private bool _CountActive = false;
+        private bool _countActive = false;
         private TimeSpan _readTime;
 
         // this is used as the lock object 
@@ -69,7 +69,7 @@ namespace Windows.Devices.Gpio
         {
             get
             {
-                return _CountActive;
+                return _countActive;
             }
         }
 
@@ -163,7 +163,7 @@ namespace Windows.Devices.Gpio
 
                 CheckIfActive(true);
 
-                _CountActive = true;
+                _countActive = true;
 
                 NativeStart();
             }
@@ -188,7 +188,7 @@ namespace Windows.Devices.Gpio
 
                 CheckIfActive(false);
 
-                _CountActive = false;
+                _countActive = false;
 
                 NativeStop();
             }
@@ -197,7 +197,7 @@ namespace Windows.Devices.Gpio
 
         private void CheckIfActive(bool state)
         {
-            if (_CountActive == state)
+            if (_countActive == state)
             {
                 throw (new InvalidOperationException());
             }
