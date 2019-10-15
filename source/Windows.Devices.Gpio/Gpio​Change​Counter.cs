@@ -1,7 +1,10 @@
 ﻿//
-// Copyright (c) 2017 The nanoFramework project contributors
+// Copyright (c) 2019 The nanoFramework project contributors
 // See LICENSE file in the project root for full license information.
 //
+
+using System;
+using System.Runtime.CompilerServices;
 
 namespace Windows.Devices.Gpio
 {
@@ -9,13 +12,27 @@ namespace Windows.Devices.Gpio
     /// Counts changes of a specified polarity on a general-purpose I/O (GPIO) pin.
     /// </summary>
     /// <remarks>
-    /// <para>When the pin is an input, interrupts are used to detect pin changes. Interrupts for the pin are enabled for the specified polarity, and the count is incremented when an interrupt occurs.</para>
-    /// <para>When the pin is an output, the count will increment whenever the specified transition occurs on the pin.For example, if the pin is configured as an output and counting is enabled for rising edges, writing a 0 and then a 1 will cause the count to be incremented.</para></remarks>
-    public sealed class Gpio​Change​Counter
+    /// <para>
+    /// When the pin is an input, interrupts are used to detect pin changes unless the MCU supports a counter in hardware. 
+    /// Changes of the pin are enabled for the specified polarity, and the count is incremented when a change occurs.
+    /// </para>
+    /// <para>
+    /// When the pin is an output, the count will increment whenever the specified transition occurs on the pin. 
+    /// For example, if the pin is configured as an output and counting is enabled for rising edges, writing a 0 and then a 1 will cause the count to be incremented.
+    /// </para>
+    /// </remarks>
+    public sealed class Gpio​Change​Counter : IDisposable
     {
         // property backing fields
-        private GpioChangePolarity _Polarity = GpioChangePolarity.Falling;
+        private int _pinNumber;
+        private bool _inputMode;
+        private GpioChangePolarity _polarity = GpioChangePolarity.Falling;
+        private bool _countActive = false;
+        private TimeSpan _readTime;
 
+        // this is used as the lock object 
+        // a lock is required because multiple threads can access the Gpio​Change​Counter
+        private object _syncLock = new object();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Gpio​Change​Counter"/> class associated with the specified pin.
@@ -25,12 +42,23 @@ namespace Windows.Devices.Gpio
         /// This pin must have been opened in Exclusive mode, and cannot be associated with another GpioChangeCounter.
         /// </param>
         /// <remarks>The following exceptions can be thrown by this method:
-        /// <para>E_POINTER - The pin passed in is null.</para>
-        /// <para>HRESULT_FROM_WIN32(ERROR_SHARING_VIOLATION) - The pin is already associated with a change counter.That change counter must be disposed before the pin can be associated with a new change counter.</para>
-        /// <para>E_ACCESSDENIED - The pin is not opened in Exclusive mode.</para></remarks>
+        /// <list type="bullet">
+        /// <item><term>E_INVALIDARG : TThe pin is already associated with a change counter.That change counter must be disposed before the pin can be associated with a new change counter.</term></item>
+        /// <item><term>E_ACCESSDENIED : The pin is not opened in Exclusive mode.</term></item>
+        /// </list>
+        /// </remarks>
         public Gpio​Change​Counter(Gpio​Pin pin)
         {
-            
+            if ( pin.SharingMode != GpioSharingMode.Exclusive )
+            {
+                throw new  ArgumentException();             }
+
+            _pinNumber = pin.PinNumber;
+            _readTime = new TimeSpan(0);
+
+            _inputMode = (pin.GetDriveMode() < GpioPinDriveMode.Output );
+
+            NativeInit();
         }
 
         /// <summary>
@@ -41,8 +69,7 @@ namespace Windows.Devices.Gpio
         {
             get
             {
-                // pin counting is not currently implemented
-                return false;
+                return _countActive;
             }
         }
 
@@ -52,20 +79,22 @@ namespace Windows.Devices.Gpio
         /// </summary>
         /// <remarks><para>The default polarity value is Falling. See <see cref="GpioChangePolarity"></see> for more information on polarity values. Counting a single edge can be considerably more efficient than counting both edges.</para>
         /// <para>The following exceptions can be thrown when setting the polarity:</para>
-        /// <para>E_INVALIDARG - value is not a valid GpioChangePolarity value.</para>
-        /// <para>HRESULT_FROM_WIN32(ERROR_BAD_COMMAND) - change counting is currently active.Polarity can only be set before calling Start() or after calling Stop().</para>
+        /// <list type="bullet">
+        /// <item><term>E_INVALID_OPERATION :Change counting is currently active. Polarity can only be set before calling Start() or after calling Stop().</term></item>
+        /// </list>
         /// </remarks>
         public GpioChangePolarity Polarity
         {
             get
             {
-                return _Polarity;
+                return _polarity;
             }
 
             set
             {
-                // TODO implement validation logic as described in the documentation
-                _Polarity = value;
+                CheckIfActive(true);
+
+                _polarity = value;
             }
         }
 
@@ -74,21 +103,44 @@ namespace Windows.Devices.Gpio
         /// </summary>
         /// <returns>A <see cref="GpioChangeCount" /> structure containing a count and an associated timestamp.</returns>
         /// <remarks><para>The following exception can be thrown by this method:</para>
-        /// <para>HRESULT_FROM_WIN32(ERROR_INVALID_HANDLE) - the change counter or the associated pin has been disposed.</para></remarks>
+        /// <list type="bullet">
+        /// <item><term>E_OBJECT_DISPOSED : The change counter or the associated pin has been disposed.</term></item>
+        /// </list>
+        /// </remarks>
         public GpioChangeCount Read()
         {
-            return new GpioChangeCount();
+            return ReadInternal(false);
         }
+
+        internal GpioChangeCount ReadInternal(bool reset)
+        {
+            GpioChangeCount ChangeCount = new GpioChangeCount();
+
+            lock (_syncLock)
+            {
+                if (_disposedValue) { throw new ObjectDisposedException(); }
+
+                ChangeCount.Count = NativeRead(reset);
+
+                // _readTime is filled by the NativeRead()
+                ChangeCount.RelativeTime = _readTime;
+            }
+            return ChangeCount;
+        }
+
 
         /// <summary>
         /// Resets the count to 0 and returns the previous count.
         /// </summary>
         /// <returns>A <see cref="GpioChangeCount" /> structure containing a count and an associated timestamp.</returns>
         /// <remarks><para>The following exception can be thrown by this method:</para>
-        /// <para>HRESULT_FROM_WIN32(ERROR_INVALID_HANDLE) - the change counter or the associated pin has been disposed.</para></remarks>
+        /// <list type="bullet">
+        /// <item><term>E_OBJECT_DISPOSED : The change counter or the associated pin has been disposed.</term></item>
+        /// </list>
+        /// </remarks>
         public GpioChangeCount Reset()
         {
-            return new GpioChangeCount();
+            return ReadInternal(true);
         }
 
         /// <summary>
@@ -97,11 +149,24 @@ namespace Windows.Devices.Gpio
         /// <remarks>
         /// <para>Calling Start() may enable or reconfigure interrupts for the pin.</para>
         /// <para>The following exceptions can be thrown by this method:</para>
-        /// <para>HRESULT_FROM_WIN32(ERROR_BAD_COMMAND) - change counting has already been started.</para>
-        /// <para>HRESULT_FROM_WIN32(ERROR_INVALID_HANDLE) - the change counter or the associated pin has been disposed.</para></remarks>
+        /// <remarks><para>The following exception can be thrown by this method:</para>
+        /// <list type="bullet">
+        /// <item><term>E_INVALID_OPERATION : Change counting has already been started.</term></item>
+        /// <item><term>E_OBJECT_DISPOSED : The change counter or the associated pin has been disposed.</term></item>
+        /// </list>
+        /// </remarks>
         public void Start()
         {
-            
+            lock (_syncLock)
+            {
+                if (_disposedValue) { throw new ObjectDisposedException(); }
+
+                CheckIfActive(true);
+
+                _countActive = true;
+
+                NativeStart();
+            }
         }
 
         /// <summary>
@@ -110,11 +175,91 @@ namespace Windows.Devices.Gpio
         /// <remarks>
         /// <para>Calling Stop() may enable or reconfigure interrupts for the pin.</para>
         /// <para>The following exceptions can be thrown by this method:</para>
-        /// <para>HRESULT_FROM_WIN32(ERROR_BAD_COMMAND) - change counting has already been started.</para>
-        /// <para>HRESULT_FROM_WIN32(ERROR_INVALID_HANDLE) - the change counter or the associated pin has been disposed.</para></remarks>
+        /// <list type="bullet">
+        /// <item><term>E_INVALID_OPERATION : Change counting has not been started.</term></item>
+        /// <item><term>E_OBJECT_DISPOSED : The change counter or the associated pin has been disposed.</term></item>
+        /// </list>
+        /// </remarks>
         public void Stop()
         {
-            
+            lock (_syncLock)
+            {
+                if (_disposedValue) { throw new ObjectDisposedException(); }
+
+                CheckIfActive(false);
+
+                _countActive = false;
+
+                NativeStop();
+            }
         }
+
+
+        private void CheckIfActive(bool state)
+        {
+            if (_countActive == state)
+            {
+                throw (new InvalidOperationException());
+            }
+        }
+
+
+        #region IDisposable Support
+
+        private bool _disposedValue = false; 
+
+        void Dispose(bool disposing)
+        {
+            if (!_disposedValue)
+            {
+                if (disposing)
+                {
+                    // TODO: dispose managed state (managed objects).
+                }
+
+                NativeDispose();
+
+                _disposedValue = true;
+            }
+        }
+
+        #pragma warning disable 1591
+        ~GpioChangeCounter()
+        {
+           Dispose(false);
+        }
+
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        public void Dispose()
+        {
+            lock (_syncLock)
+            {
+                Dispose(true);
+
+                GC.SuppressFinalize(this);
+            }
+        }
+        #endregion
+
+
+        #region Native
+        [MethodImpl(MethodImplOptions.InternalCall)]
+        private extern void NativeInit();
+
+        [MethodImpl(MethodImplOptions.InternalCall)]
+        private extern ulong NativeRead(bool Reset);
+
+        [MethodImpl(MethodImplOptions.InternalCall)]
+        private extern void NativeStart();
+
+        [MethodImpl(MethodImplOptions.InternalCall)]
+        private extern void NativeStop();
+
+        [MethodImpl(MethodImplOptions.InternalCall)]
+        private extern void NativeDispose();
+        #endregion
+
     }
 }
