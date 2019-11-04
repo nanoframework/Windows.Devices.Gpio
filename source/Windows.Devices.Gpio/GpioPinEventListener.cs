@@ -12,7 +12,7 @@ namespace Windows.Devices.Gpio
     internal class GpioPinEventListener : IEventProcessor, IEventListener
     {
         // Map of pin numbers to GpioPin objects.
-        private Hashtable _pinMap = new Hashtable();
+        private ArrayList _pinMap = new ArrayList();
 
         public GpioPinEventListener()
         {
