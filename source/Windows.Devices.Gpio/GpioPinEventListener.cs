@@ -53,7 +53,7 @@ namespace Windows.Devices.Gpio
             return true;
         }
 
-        public void AddPin(int pinNumber, GpioPin pin)
+        public void AddPin(GpioPin pin)
         {
             lock (_pinMap)
             {
