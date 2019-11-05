@@ -57,7 +57,7 @@ namespace Windows.Devices.Gpio
             if(NativeInit(_pinNumber))
             {
                 // add the pin to the event listener in order to receive the callbacks from the native interrupts
-                s_eventListener.AddPin(_pinNumber, this);
+                s_eventListener.AddPin(this);
 
                 return true;
             }
