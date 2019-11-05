@@ -67,7 +67,7 @@ namespace Windows.Devices.Gpio
             {
                 var pin = FindGpioPin(pinNumber);
 
-                if (pin == null)
+                if (pin != null)
                 {
                     _pinMap.Remove(pin);
                 }
