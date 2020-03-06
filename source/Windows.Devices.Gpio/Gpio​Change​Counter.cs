@@ -149,7 +149,7 @@ namespace Windows.Devices.Gpio
         /// <remarks>
         /// <para>Calling Start() may enable or reconfigure interrupts for the pin.</para>
         /// <para>The following exceptions can be thrown by this method:</para>
-        /// <remarks><para>The following exception can be thrown by this method:</para>
+        /// <remarks>The following exception can be thrown by this method:
         /// <list type="bullet">
         /// <item><term>E_INVALID_OPERATION : Change counting has already been started.</term></item>
         /// <item><term>E_OBJECT_DISPOSED : The change counter or the associated pin has been disposed.</term></item>
