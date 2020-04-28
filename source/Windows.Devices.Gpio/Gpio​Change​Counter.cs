@@ -28,7 +28,6 @@ namespace Windows.Devices.Gpio
         private bool _inputMode;
         private GpioChangePolarity _polarity = GpioChangePolarity.Falling;
         private bool _countActive = false;
-        private TimeSpan _readTime;
 
         // this is used as the lock object 
         // a lock is required because multiple threads can access the Gpio​Change​Counter
@@ -51,10 +50,10 @@ namespace Windows.Devices.Gpio
         {
             if ( pin.SharingMode != GpioSharingMode.Exclusive )
             {
-                throw new  ArgumentException();             }
+                throw new  ArgumentException();
+            }
 
             _pinNumber = pin.PinNumber;
-            _readTime = new TimeSpan(0);
 
             _inputMode = (pin.GetDriveMode() < GpioPinDriveMode.Output );
 
@@ -114,20 +113,16 @@ namespace Windows.Devices.Gpio
 
         internal GpioChangeCount ReadInternal(bool reset)
         {
-            GpioChangeCount ChangeCount = new GpioChangeCount();
+            GpioChangeCount changeCount;
 
             lock (_syncLock)
             {
                 if (_disposedValue) { throw new ObjectDisposedException(); }
 
-                ChangeCount.Count = NativeRead(reset);
-
-                // _readTime is filled by the NativeRead()
-                ChangeCount.RelativeTime = _readTime;
+                changeCount = NativeRead(reset);
             }
-            return ChangeCount;
+            return changeCount;
         }
-
 
         /// <summary>
         /// Resets the count to 0 and returns the previous count.
@@ -249,7 +244,7 @@ namespace Windows.Devices.Gpio
         private extern void NativeInit();
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        private extern ulong NativeRead(bool Reset);
+        private extern GpioChangeCount NativeRead(bool Reset);
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         private extern void NativeStart();
