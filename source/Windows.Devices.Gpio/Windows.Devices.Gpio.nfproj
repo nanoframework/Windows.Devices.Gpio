@@ -34,6 +34,24 @@
     <Name>Windows.Devices.Gpio</Name>
   </PropertyGroup>
   <ItemGroup>
+    <NFMDP_PE_ExcludeClassByName Include="GpioOpenStatus">
+      <InProject>false</InProject>
+    </NFMDP_PE_ExcludeClassByName>
+    <NFMDP_PE_ExcludeClassByName Include="GpioPinEdge">
+      <InProject>false</InProject>
+    </NFMDP_PE_ExcludeClassByName>
+    <NFMDP_PE_ExcludeClassByName Include="GpioSharingMode">
+      <InProject>false</InProject>
+    </NFMDP_PE_ExcludeClassByName>
+    <NFMDP_PE_ExcludeClassByName Include="GpioPinEvent">
+      <InProject>false</InProject>
+    </NFMDP_PE_ExcludeClassByName>
+    <NFMDP_PE_ExcludeClassByName Include="GpioPinEventListener">
+      <InProject>false</InProject>
+    </NFMDP_PE_ExcludeClassByName>
+    <NFMDP_PE_ExcludeClassByName Include="GpioPinValueChangedEventArgs">
+      <InProject>false</InProject>
+    </NFMDP_PE_ExcludeClassByName>
     <NFMDP_PE_ExcludeClassByName Include="ThisAssembly">
       <InProject>false</InProject>
     </NFMDP_PE_ExcludeClassByName>
