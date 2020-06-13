@@ -12,7 +12,7 @@ namespace Windows.Devices.Gpio
     internal class GpioPinEventListener : IEventProcessor, IEventListener
     {
         // Map of pin numbers to GpioPin objects.
-        private Hashtable _pinMap = new Hashtable();
+        private ArrayList _pinMap = new ArrayList();
 
         public GpioPinEventListener()
         {
@@ -41,10 +41,7 @@ namespace Windows.Devices.Gpio
 
             lock (_pinMap)
             {
-                if (_pinMap.Contains(pinEvent.PinNumber))
-                {
-                    pin = (GpioPin)_pinMap[pinEvent.PinNumber];
-                }
+                pin = FindGpioPin(pinEvent.PinNumber);
             }
 
             // Avoid calling this under a lock to prevent a potential lock inversion.
@@ -56,11 +53,11 @@ namespace Windows.Devices.Gpio
             return true;
         }
 
-        public void AddPin(int pinNumber, GpioPin pin)
+        public void AddPin(GpioPin pin)
         {
             lock (_pinMap)
             {
-                _pinMap[pin.PinNumber] = pin;
+                _pinMap.Add(pin);
             }
         }
 
@@ -68,11 +65,26 @@ namespace Windows.Devices.Gpio
         {
             lock (_pinMap)
             {
-                if (_pinMap.Contains(pinNumber))
+                var pin = FindGpioPin(pinNumber);
+
+                if (pin != null)
                 {
-                    _pinMap.Remove(pinNumber);
+                    _pinMap.Remove(pin);
                 }
             }
+        }
+
+        private GpioPin FindGpioPin(int number)
+        {
+            for (int i = 0; i < _pinMap.Count; i++)
+            {
+                if (((GpioPin)_pinMap[i]).PinNumber == number)
+                {
+                    return (GpioPin)_pinMap[i];
+                }
+            }
+
+            return null;
         }
     }
 }
