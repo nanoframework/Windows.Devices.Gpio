@@ -217,6 +217,9 @@
 
 [Full Changelog](https://github.com/nanoframework/lib-Windows.Devices.Gpio/compare/v1.2.0-preview.1...v1.2.0-preview.7)
 
+## [v1.0.5](https://github.com/nanoframework/lib-Windows.Devices.Gpio/tree/v1.0.5) (2019-02-04)
+[Full Changelog](https://github.com/nanoframework/lib-Windows.Devices.Gpio/compare/v1.0.4...v1.0.5)
+
 **Documentation and other chores:**
 
 - Update 2 NuGet dependencies [\#96](https://github.com/nanoframework/lib-Windows.Devices.Gpio/pull/96)
