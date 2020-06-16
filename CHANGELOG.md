@@ -2,6 +2,22 @@
 
 ## [v1.4.2-preview.9](https://github.com/nanoframework/lib-Windows.Devices.Gpio/tree/v1.4.2-preview.9) (2020-06-12)
 
+[Full Changelog](https://github.com/nanoframework/lib-Windows.Devices.Gpio/compare/v1.4.2...HEAD)
+
+**Documentation and other chores:**
+
+- Bumps nanoFramework.Runtime.Events from 1.4.2 to 1.8.0 [\#130](https://github.com/nanoframework/lib-Windows.Devices.Gpio/pull/130)
+
+## [v1.4.2](https://github.com/nanoframework/lib-Windows.Devices.Gpio/tree/v1.4.2) (2020-06-13)
+
+[Full Changelog](https://github.com/nanoframework/lib-Windows.Devices.Gpio/compare/v1.4.2-preview.9...v1.4.2)
+
+**Documentation and other chores:**
+
+- Release release-v1.4.2 [\#129](https://github.com/nanoframework/lib-Windows.Devices.Gpio/pull/129)
+
+## [v1.4.2-preview.9](https://github.com/nanoframework/lib-Windows.Devices.Gpio/tree/v1.4.2-preview.9) (2020-06-12)
+
 [Full Changelog](https://github.com/nanoframework/lib-Windows.Devices.Gpio/compare/v1.4.2-preview.7...v1.4.2-preview.9)
 
 **Documentation and other chores:**
