@@ -24,8 +24,8 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
-  nugetPackageName: 'nanoFramework.Windows.Devices.Gpio'
-  repoName: 'lib-Windows.Devices.Gpio'
+  nugetPackageName: 'nanoFramework.System.Device.Gpio'
+  repoName: 'lib-System.Device.Gpio'
 
 steps:
 
@@ -33,7 +33,7 @@ steps:
 # all build, update and publish steps
 - template: azure-pipelines-templates/class-lib-build.yml@templates
   parameters:
-    sonarCloudProject: 'nanoframework_lib-Windows.Devices.Gpio'
+    sonarCloudProject: 'nanoframework_lib-System.Device.Gpio'
 
 # step from template @ nf-tools repo
 # report error

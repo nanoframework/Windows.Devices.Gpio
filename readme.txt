@@ -6,7 +6,7 @@
                                                                                
 ===================================================================================
 
-API docs: https://docs.nanoframework.net/api/Windows.Devices.Gpio.html
+API docs: https://docs.nanoframework.net/api/System.Device.Gpio.html
 
 Browse our samples repository: https://github.com/nanoframework/samples
 
