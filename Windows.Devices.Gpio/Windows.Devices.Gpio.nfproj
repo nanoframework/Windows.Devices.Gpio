@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Label="Globals">
     <NanoFrameworkProjectSystemPath>$(MSBuildToolsPath)..\..\..\nanoFramework\v1.0\</NanoFrameworkProjectSystemPath>
@@ -57,16 +57,16 @@
     </NFMDP_PE_ExcludeClassByName>
   </ItemGroup>
   <ItemGroup>
-    <NFMDP_PE_LoadHints Include="..\packages\nanoFramework.CoreLibrary.1.9.1-preview.6\lib\mscorlib.dll">
+    <NFMDP_PE_LoadHints Include="..\packages\nanoFramework.CoreLibrary.1.10.0-preview.4\lib\mscorlib.dll">
       <InProject>false</InProject>
     </NFMDP_PE_LoadHints>
-    <NFMDP_PE_LoadHints Include="..\packages\nanoFramework.Runtime.Events.1.8.2-preview.10\lib\nanoFramework.Runtime.Events.dll">
+    <NFMDP_PE_LoadHints Include="..\packages\nanoFramework.Runtime.Events.1.9.0-preview.2\lib\nanoFramework.Runtime.Events.dll">
       <InProject>false</InProject>
     </NFMDP_PE_LoadHints>
   </ItemGroup>
   <Import Project="$(NanoFrameworkProjectSystemPath)NFProjectSystem.props" Condition="Exists('$(NanoFrameworkProjectSystemPath)NFProjectSystem.props')" />
   <ItemGroup>
-    <Compile Include="Extensions\Gpio​PinExtensions.cs" />
+    <Compile Include="Extensions\Gpioâ€‹PinExtensions.cs" />
     <Compile Include="GpioChangePolarity.cs" />
     <Compile Include="GpioController.cs" />
     <Compile Include="GpioOpenStatus.cs" />
@@ -78,8 +78,8 @@
     <Compile Include="GpioPinValue.cs" />
     <Compile Include="GpioPinValueChangedEventArgs.cs" />
     <Compile Include="GpioSharingMode.cs" />
-    <Compile Include="Gpio​Change​Count.cs" />
-    <Compile Include="Gpio​Change​Counter.cs" />
+    <Compile Include="Gpioâ€‹Changeâ€‹Count.cs" />
+    <Compile Include="Gpioâ€‹Changeâ€‹Counter.cs" />
     <Compile Include="IGpioController.cs" />
     <Compile Include="IGpioPin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -92,12 +92,12 @@
     <Content Include="README.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="mscorlib, Version=1.9.1.0, Culture=neutral, PublicKeyToken=c07d481e9758c731">
-      <HintPath>..\packages\nanoFramework.CoreLibrary.1.9.1-preview.6\lib\mscorlib.dll</HintPath>
+    <Reference Include="mscorlib, Version=1.10.0.0, Culture=neutral, PublicKeyToken=c07d481e9758c731">
+      <HintPath>..\packages\nanoFramework.CoreLibrary.1.10.0-preview.4\lib\mscorlib.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="nanoFramework.Runtime.Events, Version=1.8.2.0, Culture=neutral, PublicKeyToken=c07d481e9758c731">
-      <HintPath>..\packages\nanoFramework.Runtime.Events.1.8.2-preview.10\lib\nanoFramework.Runtime.Events.dll</HintPath>
+    <Reference Include="nanoFramework.Runtime.Events, Version=1.9.0.0, Culture=neutral, PublicKeyToken=c07d481e9758c731">
+      <HintPath>..\packages\nanoFramework.Runtime.Events.1.9.0-preview.2\lib\nanoFramework.Runtime.Events.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
