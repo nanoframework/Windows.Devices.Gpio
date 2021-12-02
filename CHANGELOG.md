@@ -1,6 +1,6 @@
 # Changelog
 
-## [**Changes available only in 'Preview' NuGet packages:**](https://github.com/nanoframework/lib-Windows.Devices.Gpio/tree/HEAD)
+## [v1.5.1-preview.2](https://github.com/nanoframework/lib-Windows.Devices.Gpio/tree/v1.5.1-preview.2) (2020-06-16)
 
 [Full Changelog](https://github.com/nanoframework/lib-Windows.Devices.Gpio/compare/v1.5.2-preview.24...HEAD)
 
