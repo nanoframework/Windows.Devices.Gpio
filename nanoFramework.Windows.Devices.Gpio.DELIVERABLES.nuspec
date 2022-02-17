@@ -4,8 +4,7 @@
     <id>nanoFramework.Windows.Devices.Gpio.DELIVERABLES</id>
     <version>$version$</version>
     <title>Windows.Devices.Gpio.DELIVERABLES</title>
-    <authors>nanoFramework project contributors</authors>
-    <owners>nanoFramework project contributors</owners>
+    <authors>nanoframework</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <releaseNotes>
     </releaseNotes>

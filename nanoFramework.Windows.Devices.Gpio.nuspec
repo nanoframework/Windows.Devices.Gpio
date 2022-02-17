@@ -4,10 +4,9 @@
     <id>nanoFramework.Windows.Devices.Gpio</id>
     <version>$version$</version>
     <title>nanoFramework.Windows.Devices.Gpio</title>
-    <authors>nanoFramework project contributors</authors>
-    <owners>nanoFramework project contributors</owners>
+    <authors>nanoframework</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <license type="expression">Apache-2.0</license>
+    <license type="expression">MIT</license>
     <releaseNotes>
     </releaseNotes>
     <developmentDependency>false</developmentDependency>
@@ -15,10 +14,9 @@
     <iconUrl>https://secure.gravatar.com/avatar/97d0e092247f0716db6d4b47b7d1d1ad</iconUrl>
     <repository type="git" url="https://github.com/nanoframework/lib-Windows.Devices.Gpio" commit="$commit$" />
     <copyright>Copyright (c) .NET Foundation and Contributors</copyright>
-    <description>This package includes the Windows.Devices.Gpio assembly for nanoFramework C# projects.
-This package requires a target with Windows.Devices.Gpiov$nativeVersion$.</description>
+    <description>This package includes the Windows.Devices.Gpio assembly for nanoFramework C# projects.&#10;This package requires a target with Windows.Devices.Gpio v$nativeVersion$ (checksum $checksum$).</description>
     <summary>Windows.Devices.Gpio assembly for nanoFramework C# projects</summary>
-    <tags>nanoFramework C# csharp netmf netnf Windows.Devices.Gpio</tags>
+    <tags>nanoFramework C# csharp netmf netnf Gpio</tags>
     <dependencies>
       <dependency id="nanoFramework.CoreLibrary" version="1.12.0-preview.9" />
       <dependency id="nanoFramework.Runtime.Events" version="1.10.0-preview.8" />
