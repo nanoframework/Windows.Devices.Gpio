@@ -2,7 +2,15 @@
 
 ## [**Changes available only in 'Preview' NuGet packages:**](https://github.com/nanoframework/Windows.Devices.Gpio/tree/HEAD)
 
-[Full Changelog](https://github.com/nanoframework/Windows.Devices.Gpio/compare/v1.5.4-preview.11...HEAD)
+[Full Changelog](https://github.com/nanoframework/Windows.Devices.Gpio/compare/v1.5.4-preview.13...HEAD)
+
+**Documentation and other chores:**
+
+- Update 2 NuGet dependencies [\#184](https://github.com/nanoframework/Windows.Devices.Gpio/pull/184)
+
+## [v1.5.4-preview.13](https://github.com/nanoframework/Windows.Devices.Gpio/tree/v1.5.4-preview.13) (2022-03-17)
+
+[Full Changelog](https://github.com/nanoframework/Windows.Devices.Gpio/compare/v1.5.4-preview.11...v1.5.4-preview.13)
 
 **Documentation and other chores:**
 
