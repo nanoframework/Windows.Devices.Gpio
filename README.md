@@ -15,7 +15,6 @@
 | Component | Build Status | NuGet Package |
 |:-|---|---|
 | Windows.Devices.Gpio | [![Build Status](https://dev.azure.com/nanoframework/Windows.Devices.Gpio/_apis/build/status/nanoframework.lib-Windows.Devices.Gpio?branchName=develop)](https://dev.azure.com/nanoframework/Windows.Devices.Gpio/_build/latest?definitionId=16?branchName=master) | [![NuGet](https://img.shields.io/nuget/v/nanoFramework.Windows.Devices.Gpio.svg?label=NuGet&style=flat&logo=nuget)](https://www.nuget.org/packages/nanoFramework.Windows.Devices.Gpio/) |
-| Windows.Devices.Gpio (preview) | [![Build Status](https://dev.azure.com/nanoframework/Windows.Devices.Gpio/_apis/build/status/nanoframework.lib-Windows.Devices.Gpio?branchName=develop)](https://dev.azure.com/nanoframework/Windows.Devices.Gpio/_build/latest?definitionId=16?branchName=develop) | [![](https://badgen.net/badge/NuGet/preview/D7B023?icon=https://simpleicons.now.sh/azuredevops/fff)](https://dev.azure.com/nanoframework/feed/_packaging?_a=package&feed=sandbox&package=nanoFramework.Windows.Devices.Gpio&protocolType=NuGet&view=overview) |
 
 ## Feedback and documentation
 
